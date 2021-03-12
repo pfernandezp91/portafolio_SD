@@ -7,4 +7,4 @@ const user=usuarios.getRamdonmUser();
 res.send(`Hola ${user.name} tu numero de cuenta es ${user.acount} y correo es ${user.email}`)
 });
 app.listen('3000');
-    console.log('hola guapo');
+    console.log('servidor levantado');
