@@ -1,21 +1,24 @@
+require('dotenv/config');
 var app=require("express")();
 var http=require("http").Server(app);
 const MongoClient = require('mongodb').MongoClient;
 var io=require("socket.io")(http);
+const mongoose=require("mongoose");
 
-const uri = "mongodb+srv://oramos6:12345@cluster0.onkyo.mongodb.net/chat?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
+var User=require("./models/user")
+
+mongoose.connect(process.env.DB_CONNECTION,
+    {useNewUrlParser: true, useUnifiedTopology: true }
+) .then(()=>console.log('base de datos conectada'))
+  .catch( error => console.log(error))
+
+app.get("/users",async(req,res)=>{
+    var arrayUser=await User.find()
+   res.jsonp(arrayUser); 
 });
-
-
 app.get("/",function(req,res){
-   res.sendFile(__dirname+"/index.html"); 
-});
-
+    res.sendFile(__dirname+"/index.html")
+})
 io.on("connection",function(socket){
     console.log("Nueva conexion");
     
@@ -31,4 +34,4 @@ io.on("connection",function(socket){
 
 http.listen(process.env.PORT||3000,function(){
     console.log("listen in 3000");
-});
+}); 
