@@ -2,8 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  user:  String,
-  email: String
+  user:{
+      type:String,
+      require:true
+  },
+  email:{
+  type:String,
+  require:true
+  }
 });
 
 // Crear el modelo
