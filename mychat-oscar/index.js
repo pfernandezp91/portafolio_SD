@@ -2,10 +2,8 @@ require('dotenv/config');
 //-----------Dependencias-----------------------------
 var app=require("express")();
 var http=require("http").Server(app);
-const MongoClient = require('mongodb').MongoClient;
 const bodyParser=require('body-parser');
 var io=require("socket.io")(http);
-const mongoose=require("mongoose");
 //-----------------------------------------------------
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -14,19 +12,13 @@ var User=require("./models/user")
 var Message=require("./models/message")
 //-----------------------------------------------------
 //----------Conexion a la base de datos de mongo-------
-mongoose.connect(process.env.DB_CONNECTION,
-    {useNewUrlParser: true, useUnifiedTopology: true }
-) .then(()=>console.log('base de datos conectada'))
-  .catch( error => console.log(error))
+require('./database');
 //------------------------------------------------------
+
 //-----Obtener datos de sus collections----------------
 app.get("/users",async(req,res)=>{
     var arrayUser=await User.find()
    res.jsonp(arrayUser); 
-});
-app.get("/chat",async(req,res)=>{
-    var arrayMessages=await Message.find()
-   res.jsonp(arrayMessages); 
 });
 app.post("/message",async(req,res)=>{
     try{
@@ -44,34 +36,39 @@ catch (error){
     console.log(error);
             }  
 });
-/*****Creacion de datos o insertar datos */
-User.create(
-    {
-        user:"oscari",
-        email:"oramos6@ucol.mx"
-    }
-)
-Message.create(
-    {
-        photo:"oscar.jpg",
-        user:"oramos6",
-        message:"Hola que tal estas"
-    }
-)
+
 app.get("/",function(req,res){
     res.sendFile(__dirname+"/index.html")
 })
 //avisar de una nueva conexion
-io.on("connection",function(socket){
+io.on("connection",async(socket)=>{
+
+//Carga todos los mensajes al iniciar
+    var arrayMessages=await Message.find()
+    for(var i=0 ; i <=arrayMessages.length -1 ; i++) {
+        var printmensaje =`<strong>${arrayMessages[i].user}</strong><BR>${arrayMessages[i].message}`;
+        io.emit("nuevo_mensaje",printmensaje); }
+        var bot=`<strong>BOT</strong><BR>BIENVENIDO`
+        io.emit("nuevo_mensaje",bot); 
     console.log("Nueva conexion");
-    
+
+//toma el objeto mensaje lo crea y lo imprime en el chat 
     socket.on("nuevo_mensaje",function(mensaje){
-        io.emit("nuevo_mensaje",mensaje);
+        console.log(mensaje);
+        Message.create(
+            {
+                photo:'oscar.jpg',
+                user:mensaje.user,
+                message:mensaje.mensaje
+            })
+        var printmensaje =`<strong>${mensaje.user}</strong><BR>${mensaje.mensaje}`;
+        io.emit("nuevo_mensaje",printmensaje);
     });
 
     socket.on("disconect", function(){
         console.log("desconexion");
     });
+    
 });
 //Leer el puerto 3000 
 http.listen(process.env.PORT||3000,function(){

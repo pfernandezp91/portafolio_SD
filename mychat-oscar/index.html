@@ -101,22 +101,28 @@ body {
     </div>
     <script src="/socket.io/socket.io.js"></script>
         <script>
-                var socket=io();
-
+                //---------------------------------------------------
+                  var socket=io();
+                  var txtmensaje=document.getElementById("txtmensaje");
+                  var txtusuario=document.getElementById("txtusuario");
+               
                 socket.on("nuevo_mensaje",function(mensaje){
                     document.getElementById("printmensajes").innerHTML +="<div class='chat'><div class='user-photo'><img src='https://pbs.twimg.com/profile_images/1202109204556898306/XK246fs0_400x400.jpg'></div><p class='mensaje'>"+mensaje+"</p></div>";
                 });
                 document.getElementById("btn-msg").addEventListener("click",function(){
-                    var txtmensaje=document.getElementById("txtmensaje");
-                    var txtusuario=document.getElementById("txtusuario");
-                    var printmensaje ="<strong>"+txtusuario.value+"</strong><BR> "+ txtmensaje.value;
-                    socket.emit("nuevo_mensaje",printmensaje);
+                    var mensaje={
+                            user: txtusuario.value,
+                            mensaje: txtmensaje.value
+                    }
+                    agregarMensajes(mensaje)
                     txtmensaje.value="";
                 })
-               
                 //socket.emit("nuevo_mensaje",txtmensaje.value);
+                function agregarMensajes(mensaje){
+                    socket.emit("nuevo_mensaje",mensaje);
+                }
                 
-
+                  
         </script>
     </body>
 </html>

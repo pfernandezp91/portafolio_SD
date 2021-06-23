@@ -14,6 +14,7 @@
     "express": "^4.17.1",
     "mongodb": "^3.6.9",
     "mongoose": "^5.12.12",
+    "postman-request": "^2.88.1-postman.30",
     "socket.io": "^4.0.1"
   }
 }
