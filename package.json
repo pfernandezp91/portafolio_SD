@@ -1,0 +1,25 @@
+{
+  "name": "clases_4B",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pfernandezp91/portafolio_SD.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pfernandezp91/portafolio_SD/issues"
+  },
+  "homepage": "https://github.com/pfernandezp91/portafolio_SD#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.6.9",
+    "socket.io": "^4.0.1"
+  }
+}
