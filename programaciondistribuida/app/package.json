@@ -1,0 +1,17 @@
+{
+  "name": "app_distribuida",
+  "version": "1.0.0",
+  "description": "es una prueba de instalacion",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "OSCAR RAMOS <oramos6@ucol.mx>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "exxpress": "^1.0.0",
+    "test": "^0.6.0",
+    "usuarios": "file:..\\usuarios"
+  }
+}
