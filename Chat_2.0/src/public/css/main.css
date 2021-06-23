@@ -1,0 +1,96 @@
+#contentWrap {
+  display: none;
+}
+
+.error {
+  color: red;
+}
+
+.whisper {
+  color: gray;
+  font-style: italic;
+}
+body {
+  background-image: url('../img/aaaa.jpg');
+  background-size: cover;
+}    
+.mensaje {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}    
+
+#pepino {
+  color: green;
+}
+
+.datos{  
+  padding-left: 50px;
+  width: 450px;
+  height: 450px;  
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.formulario{
+  margin-top:  20px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.titulo{
+color:white;
+text-shadow: rgb(112, 108, 112) 3px 3px 3px;
+background-color: rgb(165, 104, 104); text-align: center
+}
+
+#caja-chat {
+  text-align: center;
+  color: rgb(235, 232, 198);
+  background-color: purple;
+  width: 500px;
+  min-width: 390px;
+  height: 300px;
+  padding: 25px;
+  margin: 20px auto;
+  box-shadow: 0 3px #ccc;
+  border-radius: 12px;
+    -moz-border-radius: 20px;
+    -o-border-radius: 12px;
+    -webkit-border-radius: 12px;
+}
+#caja-chat2{
+  background-color: purple;
+  box-shadow: 0 3px #ccc;
+  border-radius: 12px;
+    -moz-border-radius: 20px;
+    -o-border-radius: 12px;
+    -webkit-border-radius: 12px;
+}
+
+
+#datos-chat {
+    padding-top: 30PX;
+    font-weight: bold;    
+    color: white;   
+}
+
+
+#txtmensaje{
+    width: 200px;
+    height: 40px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    cursor: pointer;
+}
+
+#txtusuario{
+  width: 200px;
+  height: 40px;
+  border: 1px solid gray;
+  border-radius: 6px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  cursor: pointer;
+}
